@@ -1,0 +1,29 @@
+from collections import deque
+class Graph:
+ def __init__(self):
+ self.graph = {}
+ def add_edge(self, start, end):
+ if start not in self.graph:
+ self.graph[start] = []
+ self.graph[start].append(end)
+ def bfs(self, start):
+ visited = set()
+ queue = deque([start])
+ while queue:
+ current_node = queue.popleft()
+ if current_node not in visited:
+ print("Visiting node:", current_node)
+ visited.add(current_node)
+ neighbors = self.graph.get(current_node, [])
+ queue.extend(neighbor for neighbor in
+neighbors if neighbor not in visited)
+# Example usage:
+graph = Graph()
+graph.add_edge('A', 'B')
+graph.add_edge('A', 'C')
+graph.add_edge('B', 'D')
+graph.add_edge('C', 'E')
+graph.add_edge('D', 'E')
+start_node = 'A'
+print(f"Breadth-First Search from {start_node}:")
+graph.bfs(start_node)
