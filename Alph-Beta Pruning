@@ -1,0 +1,31 @@
+maximum,minimum=1000,-1000
+def fun_alphabeta(d,node,maxt,v,A,B):
+ if d==3:
+ return v[node]
+ if maxt:
+ best=minimum
+ for i in range(0,2):
+ value=fun_alphabeta(d+1,node*2+i,False,v,A,B)
+ best=max(best,value)
+ A=max(A,best)
+ if B<=A:
+ break
+ return best
+ else:
+ best=maximum
+ for i in range(0,2):
+ value=fun_alphabeta(d+1,node*2+i,True,v,A,B)
+ best=min(best,value)
+ A=min(A,best)
+ if B<=A:
+ break
+ return best
+scr=[]
+x=int(input("enter the total no. of leaf node"))
+for i in range(x):
+ y=int(input("enter the leaf value"))
+ scr.append(y)
+d=int(input("enter the depth value"))
+node=int(input("enter the node value"))
+answer=fun_alphabeta(d,node,True,scr,minimum, maximum)
+print(answer)
